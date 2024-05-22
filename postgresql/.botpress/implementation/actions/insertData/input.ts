@@ -11,11 +11,11 @@ export interface Input {
    */
   table: string;
   /**
-   * A comma-separated string of columns
+   * A comma-separated string of columns. For example, name,email
    */
   columns: string;
   /**
-   * A comma-separated string of values
+   * A comma-separated string of values. For example, John Doe,john.doe@example.com
    */
   values: string;
 }

@@ -14,14 +14,13 @@ export const customQuery: Implementation['actions']['customQuery'] = async ({ ct
     const { query } = validatedInput;
     logger.forBot().info(`${JSON.stringify(query)}`);
 
-    const result = await dbClient.query(query, []);
+    const result = await dbClient.query(query, [], "Custom query completed.");
     
     logger.forBot().info(`Successful - Custom Query`);
     logger.forBot().info(result)
     return result;
   } catch (error) {
     logger.forBot().info(`'Custom query' exception ${JSON.stringify(error)}`);
-    
     throw error; 
   } finally {
     if (dbClient) {

@@ -7,11 +7,11 @@
 
 export interface Input {
   /**
-   * The name of the table to create.
+   * The name of the table to create. For example, test_table
    */
   tableName: string;
   /**
-   * A comma-separated string representing the columns and their types
+   * A comma-separated string representing the columns and their types. For example, id SERIAL PRIMARY KEY, name VARCHAR(100), email VARCHAR(100) UNIQUE NOT NULL
    */
   columns: string;
 }

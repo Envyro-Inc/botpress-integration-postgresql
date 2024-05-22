@@ -2,8 +2,8 @@ import { z } from '@botpress/sdk';
 
 // Input and Output Schemas for createTable
 export const createTableInputSchema = z.object({
-  tableName: z.string().describe('The name of the table to create.').placeholder('users'),
-  columns: z.string().describe('A comma-separated string representing the columns and their types').placeholder('id SERIAL PRIMARY KEY, name VARCHAR(100), email VARCHAR(100) UNIQUE NOT NULL')
+  tableName: z.string().describe('The name of the table to create. For example, test_table').placeholder('test_table'),
+  columns: z.string().describe('A comma-separated string representing the columns and their types. For example, id SERIAL PRIMARY KEY, name VARCHAR(100), email VARCHAR(100) UNIQUE NOT NULL').placeholder('id SERIAL PRIMARY KEY, name VARCHAR(100), email VARCHAR(100) UNIQUE NOT NULL')
 });
 
 export const createTableOutputSchema = z.object({
@@ -17,7 +17,7 @@ export const createTableOutputSchema = z.object({
 
 // Input and Output Schemas for dropTable
 export const dropTableInputSchema = z.object({
-  tableName: z.string().describe('The name of the table to drop.').placeholder('users')
+  tableName: z.string().describe('The name of the table to drop. For example, test_table').placeholder('test_table')
 });
 
 export const dropTableOutputSchema = z.object({
@@ -32,8 +32,8 @@ export const dropTableOutputSchema = z.object({
 // Input and Output Schemas for insertData
 export const insertDataInputSchema = z.object({
   table: z.string().describe('The name of the table.').placeholder('users'),
-  columns: z.string().describe('A comma-separated string of columns').placeholder('name,email'),
-  values: z.string().describe('A comma-separated string of values').placeholder('John Doe,john.doe@example.com')
+  columns: z.string().describe('A comma-separated string of columns. For example, name,email').placeholder('name,email'),
+  values: z.string().describe('A comma-separated string of values. For example, John Doe,john.doe@example.com').placeholder('John Doe,john.doe@example.com')
 });
 
 export const insertDataOutputSchema = z.object({
@@ -48,8 +48,8 @@ export const insertDataOutputSchema = z.object({
 // Input and Output Schemas for deleteData
 export const deleteDataInputSchema = z.object({
   table: z.string().describe('The name of the table.').placeholder('users'),
-  conditions: z.string().describe('A comma-separated string of conditions').placeholder('email = john.doe@example.com, age > 30'),
-  logicalOperator: z.string().describe('The logical operator to join conditions').optional().default('AND').placeholder('AND')
+  conditions: z.string().describe('A semicolon-separated string of conditions. For example, email=john.doe@example.com;age>30').placeholder('email=john.doe@example.com;age>30'),
+  logicalOperators: z.string().describe('The logical operators to join conditions. For example, AND,OR').optional().default('AND').placeholder('AND,OR')
 });
 
 export const deleteDataOutputSchema = z.object({
@@ -66,8 +66,8 @@ export const updateDataInputSchema = z.object({
   table: z.string().describe('The name of the table.').placeholder('users'),
   updateColumn: z.string().describe('A comma-separated string of columns to update. For example, name,email').placeholder('name,email'),
   newValue: z.string().describe('A comma-separated string of new values to set. For example, Jane Doe,jane.doe@example.com').placeholder('Jane Doe,jane.doe@example.com'),
-  conditions: z.string().describe('A semicolon-separated string of conditions. For example, email = john.doe@example.com;age > 30').placeholder('email = john.doe@example.com;age > 30'),
-  logicalOperator: z.string().describe('The logical operator to join conditions. For example, AND, OR').optional().default('AND').placeholder('AND')
+  conditions: z.string().describe('A semicolon-separated string of conditions. For example, email=john.doe@example.com;age>30').placeholder('email=john.doe@example.com;age>30'),
+  logicalOperators: z.string().describe('The logical operators to join conditions. For example, AND,OR').optional().default('AND').placeholder('AND,OR')
 });
 
 
@@ -83,9 +83,9 @@ export const updateDataOutputSchema = z.object({
 // Input and Output Schemas for queryData
 export const queryDataInputSchema = z.object({
   table: z.string().describe('The name of the table.').placeholder('users'),
-  selectColumn: z.string().describe('A comma-separated string of columns to select').placeholder('name,email'),
-  conditions: z.string().describe('A comma-separated string of conditions').placeholder('email = john.doe@example.com, age > 30'),
-  logicalOperator: z.string().describe('The logical operator to join conditions').optional().default('AND').placeholder('AND')
+  selectColumn: z.string().describe('A comma-separated string of columns to select. For example, name,email').placeholder('name,email'),
+  conditions: z.string().describe('A semicolon-separated string of conditions. For example, email=john.doe@example.com;age>30').placeholder('email=john.doe@example.com;age>30'),
+  logicalOperators: z.string().describe('The logical operators to join conditions. For example, AND,OR').optional().default('AND').placeholder('AND,OR')
 });
 
 export const queryDataOutputSchema = z.object({
@@ -99,7 +99,7 @@ export const queryDataOutputSchema = z.object({
 
 // Input and Output Schemas for customQuery
 export const customQueryInputSchema = z.object({
-  query: z.string().describe('The SQL query to execute.').placeholder('SELECT * FROM users WHERE email = $1'),
+  query: z.string().describe('The SQL query to execute. For example, SELECT * FROM test_table').placeholder('SELECT * FROM test_table'),
 });
 
 export const customQueryOutputSchema = z.object({

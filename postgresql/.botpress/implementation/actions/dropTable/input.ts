@@ -7,7 +7,7 @@
 
 export interface Input {
   /**
-   * The name of the table to drop.
+   * The name of the table to drop. For example, test_table
    */
   tableName: string;
 }

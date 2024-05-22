@@ -30,7 +30,7 @@ export const insertData: Implementation['actions']['insertData'] = async ({ ctx,
     logger.forBot().debug(`Constructed query: ${query}`);
     logger.forBot().debug(`Query parameters: ${JSON.stringify(valuesArray)}`);
 
-    const result = await dbClient.query(query, valuesArray);
+    const result = await dbClient.query(query, valuesArray, "Insert query completed.");
 
     logger.forBot().info(`Successful - Insert Data into '${table}'`);
     logger.forBot().debug(`Response - ${JSON.stringify(result)}`);

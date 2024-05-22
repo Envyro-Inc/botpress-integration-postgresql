@@ -22,15 +22,12 @@ export const dropTable: Implementation['actions']['dropTable'] = async ({ ctx, l
     // Log the constructed query for debugging
     logger.forBot().debug(`Constructed query: ${query}`);
 
-    const result = await dbClient.query(query, []);
+    const result = await dbClient.query(query, [], "Table drop query completed.");
 
     logger.forBot().info(`Successful - Drop Table '${tableName}'`);
     logger.forBot().debug(`Response - ${JSON.stringify(result)}`);
 
-    return {
-      success: result.success,
-      message: "Table Dropped",
-    };
+    return result;
   } catch (error) {
     logger.forBot().debug(`'Drop Table' exception: ${JSON.stringify(error)}`);
     throw error;

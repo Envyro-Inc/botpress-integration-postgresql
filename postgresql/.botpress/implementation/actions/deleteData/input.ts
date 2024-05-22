@@ -11,11 +11,11 @@ export interface Input {
    */
   table: string;
   /**
-   * A comma-separated string of conditions
+   * A semicolon-separated string of conditions. For example, email=john.doe@example.com;age>30
    */
   conditions: string;
   /**
-   * The logical operator to join conditions
+   * The logical operators to join conditions. For example, AND,OR
    */
-  logicalOperator?: string;
+  logicalOperators?: string;
 }

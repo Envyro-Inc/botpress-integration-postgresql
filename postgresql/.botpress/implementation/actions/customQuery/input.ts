@@ -7,7 +7,7 @@
 
 export interface Input {
   /**
-   * The SQL query to execute.
+   * The SQL query to execute. For example, SELECT * FROM test_table
    */
   query: string;
 }

@@ -20,15 +20,12 @@ export const createTable: Implementation['actions']['createTable'] = async ({ ct
     // Log the constructed query for debugging
     logger.forBot().debug(`Constructed query: ${query}`);
 
-    const result = await dbClient.query(query, []);
+    const result = await dbClient.query(query, [], "Create table query completed.");
 
     logger.forBot().info(`Successful - Create Table '${tableName}'`);
     logger.forBot().debug(`Response - ${JSON.stringify(result)}`);
 
-    return {
-      success: result.success,
-      message: "Table Created",
-    };
+    return result;
   } catch (error) {
     logger.forBot().debug(`'Create Table' exception: ${JSON.stringify(error)}`);
     throw error;
