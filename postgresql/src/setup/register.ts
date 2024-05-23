@@ -1,4 +1,5 @@
 import { getClient } from 'src/client';
+import * as bpclient from "@botpress/client";
 import type { RegisterFunction } from '../misc/types';
 
 export const register: RegisterFunction = async ({ ctx, logger }) => {
@@ -11,16 +12,22 @@ export const register: RegisterFunction = async ({ ctx, logger }) => {
     await dbClient.connect();
 
     // Test the connection by running a simple query
-    const result = await dbClient.query('SELECT NOW()', []);
+    const result = await dbClient.query('SELECT NOW()', [], "Test registration query completed.");
+    if (result.success == false) {
+      throw new Error(result.message);
+    }
+
     logger.forBot().info(result)
     logger.forBot().info("Successfully accessed PostgreSQL: Integration can proceed");
-  } catch (error) {
-    // If there's an error in the command, it will come here
-    logger.forBot().error("Failed to access PostgreSQL: Check configuration", error);
-    return; // Stop the registration process if access fails
-  } finally {
     if (dbClient) {
       await dbClient.disconnect();
     }
+  } catch (error) {
+    // If there's an error in the command, it will come here
+    logger.forBot().error("Failed to access PostgreSQL: Check configuration", error);
+
+    throw new bpclient.RuntimeError(
+      `Configuration ${error}`
+    );
   }
 };
